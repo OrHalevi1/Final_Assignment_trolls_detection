@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yael, Dror and Or">
+
+<title>Summary work - trolls detection</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Final_Assignment_trolls_detection_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Final_Assignment_trolls_detection_files/libs/quarto-html/quarto.js"></script>
+<script src="Final_Assignment_trolls_detection_files/libs/quarto-html/popper.min.js"></script>
+<script src="Final_Assignment_trolls_detection_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Final_Assignment_trolls_detection_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Final_Assignment_trolls_detection_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Final_Assignment_trolls_detection_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Final_Assignment_trolls_detection_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Final_Assignment_trolls_detection_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Final_Assignment_trolls_detection_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Summary work - trolls detection</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yael, Dror and Or </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<section id="trolls-what-are-they-and-why-do-they-cause-problems" class="level3">
+<h3 class="anchored" data-anchor-id="trolls-what-are-they-and-why-do-they-cause-problems">Trolls: what are they and why do they cause problems?</h3>
+<p>Typically, trolling refers to the act of intentionally engaging in online activity in an attempt to harm others. Through misleading internet messages, trolls may spread fake news, engage in fraud, and manipulate public perception by creating fake accounts based on real identities.</p>
+<p>Twitter trolls are characterized by persistent harassment and abuse, resulting in offensive messages and harmful user interactions. Despite Twitter’s awareness of this issue, its policies have not been enforced effectively, resulting in difficulties in managing it. Due to a chaotic working environment, it is challenging to maintain features designed to prevent trolling, and hate and abusive behavior have been on the rise.</p>
+<p>Due to this, harassment victims resort to several tactics, such as blocking harassers using third-party tools and exposing them to their followers to raise awareness. However, the lack of decisive action creates a chilling effect, leading users to self-censor and refrain from posting to avoid abuse. As a result, diverse voices may be discouraged from actively participating and engaging on Twitter, negatively impacting user growth and inclusivity.</p>
+</section>
+<section id="what-are-the-benefits-of-troll-identification-research" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-the-benefits-of-troll-identification-research">What are the benefits of troll identification research?</h3>
+<p>Studying trolling on Twitter and utilizing text analysis to differentiate between trolling tweets and genuine tweets holds significant interest and importance for several reasons. Firstly, trolling has become a prominent concern in social media, affecting user experiences and well-being. By shedding light on the characteristics and patterns of troll behavior, this research has the potential to enhance our understanding of online harassment and contribute to the development of more effective strategies for combating it.</p>
+<p>Secondly, text analysis and machine learning models present an innovative approach to studying trolls. Leveraging features identified in the existing literature to identify trolls allows for a comprehensive investigation into bot behavior and their impact on Twitter. By employing three different machine learning models, this work can provide valuable insights into the strengths and weaknesses of each approach, enabling the identification of the most accurate and efficient method for trolls detection.</p>
+<p>Moreover, as online social platforms continue to grow in significance as spaces for public discourse, ensuring a safe and inclusive digital environment becomes imperative. Understanding the mechanisms and features that differentiate troll tweets from genuine ones can inform the development of robust content moderation and policy enforcement strategies. This work can contribute to ongoing efforts to create safer online spaces where diverse voices can freely engage and exchange ideas without fear of harassment or abuse.</p>
+<p>Overall, examining trolling through text analysis and machine learning offers a multifaceted exploration of a problem that impacts millions of social media users worldwide. The insights gained from this work will advance data science and natural language processing and foster positive changes in how online platforms address and mitigate trolling’s harmful effects.</p>
+</section>
+</section>
+<section id="first-step---feature-extraction" class="level2">
+<h2 class="anchored" data-anchor-id="first-step---feature-extraction">First step - Feature extraction</h2>
+<p>We compiled a feature table based on relevant attributes identified in the existing literature. These features are well-established indicators for distinguishing between trolling and genuine tweets (Bhatt &amp; Rios, 2021; Ghanem et al., 2020). The selected features encompassed various aspects, such as the number of hashtags, words, the overall length of the tweet, and the frequency of curse words used. Additionally, we considered linguistic characteristics by analyzing the number of verbs, nouns, and adjectives present in each tweet. By incorporating these diverse features, we aimed to capture essential patterns and insights to improve our statistical model’s discriminatory power.</p>
+<section id="load-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="load-libraries">Load Libraries</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|warn.lib.attach: false</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readtext)    <span class="co"># data preparation</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)     <span class="co"># data preparation</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)     <span class="co"># data preparation</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)    <span class="co"># data preparation and analysis</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># data wrangling and viz &lt;3</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hcandersenr)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Dictionary Distributed Representations</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(syuzhet)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lexicon)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(udpipe)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ML modelling</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yardstick)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="read-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="read-the-data">Read the data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"train.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>label)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data<span class="sc">$</span>label) <span class="co"># 1 for troll, 0 for not-troll</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as.tibble</span>(data) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cleaning-and-preprocessing-the-contents" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-and-preprocessing-the-contents">Cleaning and preprocessing the contents</h3>
+<section id="string-operations" class="level4">
+<h4 class="anchored" data-anchor-id="string-operations"><em>String Operations</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>clean_text <span class="ot">&lt;-</span> <span class="cf">function</span>(data, text_column_name) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define functions to remove HTML tags, URLs, accented chars, punctuation, irregular chars, and extra whitespaces</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  remove_html_tags_func <span class="ot">&lt;-</span> <span class="cf">function</span>(text) {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">&lt;-</span> <span class="fu">stri_replace_all</span>(text, <span class="at">regex =</span> <span class="st">"&lt;.*?&gt;"</span>, <span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(text)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  remove_url_func <span class="ot">&lt;-</span> <span class="cf">function</span>(text) {</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">&lt;-</span> <span class="fu">stri_replace_all</span>(text, <span class="at">regex =</span> <span class="st">"https?://</span><span class="sc">\\</span><span class="st">S+</span><span class="sc">\\</span><span class="st">s*"</span>, <span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(text)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  remove_accented_chars_func <span class="ot">&lt;-</span> <span class="cf">function</span>(text) {</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">&lt;-</span> <span class="fu">stri_trans_general</span>(text, <span class="st">"latin-ascii"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(text)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  remove_stopwords <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(x, <span class="fu">stopwords</span>(<span class="st">"english"</span>))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  remove_punctuation_func <span class="ot">&lt;-</span> <span class="cf">function</span>(text) {</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">&lt;-</span> <span class="fu">stri_replace_all_regex</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">p{P}"</span>, <span class="st">""</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(text)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  remove_irr_char_func <span class="ot">&lt;-</span> <span class="cf">function</span>(text) {</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">&lt;-</span> <span class="fu">stri_replace_all_regex</span>(text, <span class="st">"[^[:alnum:]#'</span><span class="sc">\\</span><span class="st">s]"</span>, <span class="st">" "</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">&lt;-</span> <span class="fu">stri_replace_all_regex</span>(text, <span class="st">"(</span><span class="sc">\\</span><span class="st">w)'(</span><span class="sc">\\</span><span class="st">w)"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">1</span><span class="sc">\\</span><span class="st">2"</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">&lt;-</span> <span class="fu">stri_replace_all_regex</span>(text, <span class="st">"(.)</span><span class="sc">\\</span><span class="st">1{2,}"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">1</span><span class="sc">\\</span><span class="st">1"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(text)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  remove_extra_whitespaces_func <span class="ot">&lt;-</span> <span class="cf">function</span>(text) {</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">&lt;-</span> <span class="fu">stri_replace_all_regex</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>, <span class="st">" "</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">&lt;-</span> <span class="fu">stri_trim</span>(text)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(text)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>   remove_numbers_func <span class="ot">&lt;-</span> <span class="cf">function</span>(text) {</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">&lt;-</span> <span class="fu">stri_replace_all_regex</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>, <span class="st">" "</span>)  </span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(text)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Apply cleaning functions to the specified text column in the DataFrame</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>content_clean <span class="ot">&lt;-</span> <span class="fu">tolower</span>(data[[text_column_name]])</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>content_clean <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data<span class="sc">$</span>content_clean, remove_numbers_func)</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>content_clean <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data<span class="sc">$</span>content_clean, remove_html_tags_func)</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>content_clean <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data<span class="sc">$</span>content_clean, remove_url_func)</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>content_clean <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data<span class="sc">$</span>content_clean, remove_stopwords)</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>content_clean <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data<span class="sc">$</span>content_clean, remove_accented_chars_func)</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>content_clean <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data<span class="sc">$</span>content_clean, remove_punctuation_func)</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>content_clean <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data<span class="sc">$</span>content_clean, remove_irr_char_func)</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>content_clean <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data<span class="sc">$</span>content_clean, remove_numbers_func)</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>content_clean <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data<span class="sc">$</span>content_clean, remove_extra_whitespaces_func)</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove rows with empty "Clean_Content" column</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">subset</span>(data, <span class="sc">!</span>content_clean <span class="sc">==</span> <span class="st">""</span>)</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data)</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">clean_text</span>(data, <span class="st">"content"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="transform-the-data-into-a-corpus" class="level4">
+<h4 class="anchored" data-anchor-id="transform-the-data-into-a-corpus"><em>Transform the data into a corpus</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> tm<span class="sc">::</span><span class="fu">Corpus</span>(<span class="fu">VectorSource</span>(data<span class="sc">$</span>content_clean))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, removeWords, <span class="fu">stopwords</span>(<span class="st">"english"</span>)) <span class="co">#Removing Stopwords</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, <span class="fu">content_transformer</span>(removeNumbers)) <span class="co">#Removing Numbers</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>removeURL <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fu">gsub</span>(<span class="st">'http</span><span class="sc">\\</span><span class="st">S+</span><span class="sc">\\</span><span class="st">s*'</span>,<span class="st">""</span> , x) } <span class="co">#Removing urls</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>removeMentions <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fu">gsub</span>(<span class="st">"@</span><span class="sc">\\</span><span class="st">w+"</span>, <span class="st">""</span>, x) } <span class="co">#Removing mentions</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>removeHashTags  <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fu">gsub</span>(<span class="st">'#</span><span class="sc">\\</span><span class="st">S+'</span>, <span class="st">""</span>, x) } <span class="co">#Removing hashtags</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>removeRT <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fu">gsub</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">b+RT'</span>, <span class="st">""</span>, x) } <span class="co">#\#Removing RT in tweets</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Apply these functions to the corpus:</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus,removeURL) </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus,removeMentions) </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus,removeHashTags) </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus,removeRT)  </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, <span class="fu">content_transformer</span>(removePunctuation)) <span class="co">#Removing Punctuation</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, <span class="fu">content_transformer</span>(stripWhitespace)) <span class="co">#Removing whitespaces</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>corpus<span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, <span class="fu">content_transformer</span>(stemDocument), <span class="at">language=</span><span class="st">"english"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tokenization" class="level4">
+<h4 class="anchored" data-anchor-id="tokenization"><em>Tokenization</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a custom tokenizer function</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>custom_tokenizer <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">unlist</span>(<span class="fu">strsplit</span>(<span class="fu">tolower</span>(x), <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the tokenizer to the Corpus</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, <span class="fu">content_transformer</span>(custom_tokenizer))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the Corpus to a list of character vectors</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>data_tokens <span class="ot">&lt;-</span> <span class="fu">sapply</span>(corpus, unlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize the text</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">as.tibble</span>(data<span class="sc">$</span>content_clean)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> text <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">content_clean =</span> value) </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>data_tokens <span class="ot">&lt;-</span> <span class="fu">unnest_tokens</span>(text,word,content_clean)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>data_tokens <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rowid, label, content_clean) <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">as.factor</span>(label)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, content_clean) <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">"word"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="adding-features" class="level2">
+<h2 class="anchored" data-anchor-id="adding-features">Adding features</h2>
+<section id="count-hashtags-count-mentions-count-urls-httpscount-length-calculate-vocabulary-richness-calculate-capital-letters-calculate-punctuation-marks-numbers-count_common_words-calculate_unique_words" class="level5">
+<h5 class="anchored" data-anchor-id="count-hashtags-count-mentions-count-urls-httpscount-length-calculate-vocabulary-richness-calculate-capital-letters-calculate-punctuation-marks-numbers-count_common_words-calculate_unique_words"><em>Count hashtags, (#),Count mentions (@),Count urls (https),Count length, Calculate Vocabulary Richness, Calculate capital letters, Calculate punctuation marks, numbers, count_common_words, calculate_unique_words</em></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to perform data wrangling and feature extraction</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>extract_features <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to count hashtags</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  count_hashtags <span class="ot">&lt;-</span> <span class="cf">function</span>(content) {</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    hashtags <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(content, <span class="st">"#"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">sapply</span>(hashtags, length))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to count mentions</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  count_mentions <span class="ot">&lt;-</span> <span class="cf">function</span>(content) {</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    mentions <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(content, <span class="st">"@"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">sapply</span>(mentions, length))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to count URLs</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  count_url <span class="ot">&lt;-</span> <span class="cf">function</span>(content) {</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(content, <span class="st">"https"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">sapply</span>(url, length))</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to get text length</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  get_text_length <span class="ot">&lt;-</span> <span class="cf">function</span>(content) {</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">nchar</span>(content))</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to calculate vocabulary richness</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  calculate_vocab_richness <span class="ot">&lt;-</span> <span class="cf">function</span>(content_clean) {</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    words <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(content_clean, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>))</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    total_words <span class="ot">&lt;-</span> <span class="fu">length</span>(words)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    unique_words <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(words))</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(unique_words <span class="sc">/</span> total_words)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to count capital letters</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>  count_capital_letters <span class="ot">&lt;-</span> <span class="cf">function</span>(content) {</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">str_count</span>(content, <span class="st">"</span><span class="sc">\\</span><span class="st">b[A-Z]</span><span class="sc">\\</span><span class="st">w*</span><span class="sc">\\</span><span class="st">b"</span>))</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to count punctuation marks</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  count_punctuation_marks <span class="ot">&lt;-</span> <span class="cf">function</span>(content) {</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">str_count</span>(content, <span class="st">"[[:punct:]]"</span>))</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to count numbers in text</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>  count_numbers <span class="ot">&lt;-</span> <span class="cf">function</span>(content) {</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use regex to find and count numbers</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    numbers <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(content, <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">b"</span>)</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">sapply</span>(numbers, length))</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a> }</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Function to count common words</span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>  count_common_words <span class="ot">&lt;-</span> <span class="cf">function</span>(text, word_vector) {</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    text_words <span class="ot">&lt;-</span> <span class="fu">str_split</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>    common_words <span class="ot">&lt;-</span> <span class="fu">intersect</span>(word_vector, text_words)</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>    count <span class="ot">&lt;-</span> <span class="fu">length</span>(common_words)</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(count)</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to calculate unique words</span></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>  calculate_unique_words <span class="ot">&lt;-</span> <span class="cf">function</span>(content_clean) {</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>    words <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(content_clean, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>))</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>    unique_words <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(words))</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(unique_words)</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to calculate total words</span></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>  calculate_total_words <span class="ot">&lt;-</span> <span class="cf">function</span>(content_clean) {</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>    words <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(content_clean, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>))</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>    total_words <span class="ot">&lt;-</span> <span class="fu">length</span>(words)</span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(total_words)</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to calculate average words per tweet</span></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>  calculate_avg_words_per_tweet <span class="ot">&lt;-</span> <span class="cf">function</span>(content_clean) {</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>    words <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(content_clean, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>))</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>    total_words <span class="ot">&lt;-</span> <span class="fu">length</span>(words)</span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>    total_tweets <span class="ot">&lt;-</span> <span class="fu">length</span>(content_clean)</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>    avg_words_per_tweet <span class="ot">&lt;-</span> total_words <span class="sc">/</span> total_tweets</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(avg_words_per_tweet)</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>      <span class="at">hashtags_count =</span> <span class="fu">sapply</span>(<span class="fu">str_extract_all</span>(content, <span class="st">"#"</span>), length),</span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>      <span class="at">mentions_count =</span> <span class="fu">sapply</span>(<span class="fu">str_extract_all</span>(content, <span class="st">"@"</span>), length),</span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>      <span class="at">url_count =</span> <span class="fu">sapply</span>(<span class="fu">str_extract_all</span>(content, <span class="st">"https"</span>), length),</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>      <span class="at">content_length =</span> <span class="fu">nchar</span>(content),</span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>      <span class="at">vocab_richness =</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(content, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>), <span class="cf">function</span>(content) {</span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>        words <span class="ot">&lt;-</span> <span class="fu">unlist</span>(content)</span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>        total_words <span class="ot">&lt;-</span> <span class="fu">length</span>(words)</span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>        unique_words <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(words))</span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(unique_words <span class="sc">/</span> total_words)</span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>      }),</span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>      <span class="at">n_capital_letters =</span> <span class="fu">str_count</span>(content, <span class="st">"</span><span class="sc">\\</span><span class="st">b[A-Z]</span><span class="sc">\\</span><span class="st">w*</span><span class="sc">\\</span><span class="st">b"</span>),</span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a>      <span class="at">n_punctuation_marks =</span> <span class="fu">str_count</span>(content, <span class="st">"[[:punct:]]"</span>),</span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a>      <span class="at">n_curses =</span> <span class="fu">sapply</span>(content, <span class="cf">function</span>(text) {</span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a>        text_words <span class="ot">&lt;-</span> <span class="fu">str_split</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a>        common_words <span class="ot">&lt;-</span> <span class="fu">intersect</span>(profanity_alvarez, text_words)</span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a>        count <span class="ot">&lt;-</span> <span class="fu">length</span>(common_words)</span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(count)</span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a>      }),</span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">unique_words =</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(content_clean, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>), <span class="cf">function</span>(content) {</span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>        words <span class="ot">&lt;-</span> <span class="fu">unlist</span>(content)</span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a>        unique_words <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(words))</span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(unique_words)</span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>      }),</span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a>       <span class="at">total_words =</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(content_clean, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>), <span class="cf">function</span>(content) {</span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>        words <span class="ot">&lt;-</span> <span class="fu">unlist</span>(content)</span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>        total_words <span class="ot">&lt;-</span> <span class="fu">length</span>(words)</span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(total_words)</span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a>      }),</span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a>      <span class="at">numbers_count =</span> <span class="fu">count_numbers</span>(content)</span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data)</span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="distributed-dictionary-representations-ddr" class="level3">
+<h3 class="anchored" data-anchor-id="distributed-dictionary-representations-ddr">Distributed Dictionary Representations (DDR)</h3>
+<p>ur model’s feature enhancement process leveraged <strong>Distributed Dictionary Representations (DDR)</strong> to enrich its capabilities. DDR, as introduced by Garten et al.&nbsp;(2018), involves the aggregation of word vectors from dictionaries, thereby embedding a dictionary within the space of word embeddings. This methodology allows for the comparison of a dictionary’s central representation with embeddings extracted from natural language text, such as social media posts. Contrary to the conventional method of tallying dictionary words in text, DDR determines the semantic similarity between words in the text and those within the dictionary. This semantic approach significantly increases analysis accuracy, particularly in concise texts. Our study used DDR to assess diverse aspects of tweets, including their emotional content, positive and negative sentiment, profanity usage, and syntactic attributes.</p>
+<p>To evaluate emotional expression and polarity in tweets, we employed the <strong>NRC Emotion Lexicon</strong>- a comprehensive resource associating English words with eight fundamental emotions (anger, fear, anticipation, trust, surprise, sadness, joy, and disgust) as well as positive and negative sentiments. In addition, we chose <strong>AFINN lexicon</strong> to provide another measure of sentiment. AFINN lexicon provides sentiment values (between -5 and 5) for words, with negative values indicating negative sentiment and positive values indicating positive sentiment. Moreover, to gauge profanity presence, we used the <strong>profanity_alvarez lexicon</strong> that contains an inventory of explicit languages curated by Alejandro U. Alvarez. Additionally, for syntactic analysis, we harnessed the <strong>UDPipe Natural Language Processing tool</strong>. This encompasses language-independent tokenization, tagging, lemmatization, and dependency parsing. This suite of linguistic analysis allowed us to quantify the occurrences of verbs, nouns, and adjectives in each tweet, thereby enabling a comprehensive understanding of linguistic composition. Through the integration of DDR and these specialized dictionaries, our model was equipped to extract nuanced insights from tweets, extending its capabilities beyond mere word counting and enhancing its ability to decode intricate language nuances.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>perform_ddr_analysis <span class="ot">&lt;-</span> <span class="cf">function</span>(data, <span class="at">text_column =</span> <span class="st">"content_clean"</span>) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get NRC sentiment scores for each rowid based on the specified text_column</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">nrc_scores =</span> <span class="fu">list</span>(<span class="fu">get_nrc_sentiment</span>(<span class="sc">!!</span><span class="fu">sym</span>(text_column)))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest_wider</span>(nrc_scores, <span class="at">names_sep =</span> <span class="st">"_"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load AFINN lexicon</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  Afinn <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(working_dir, <span class="st">"Afinn.csv"</span>))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate AFINN scores</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  data.tokens <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> tidytext<span class="sc">::</span><span class="fu">unnest_tokens</span>(<span class="at">input =</span> text_column, <span class="at">output =</span> <span class="st">"word"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  afinn_scores <span class="ot">&lt;-</span> data.tokens <span class="sc">%&gt;%</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(Afinn, <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(rowid) <span class="sc">%&gt;%</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">afinn_scores =</span> <span class="fu">sum</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(afinn_scores, <span class="at">by =</span> <span class="st">"rowid"</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load the UDpipe model for POS tagging</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  udmodel <span class="ot">&lt;-</span> <span class="fu">udpipe_load_model</span>(<span class="st">"english-ewt-ud-2.5-191206.udpipe"</span>)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to count verbs, adjectives, and nouns in a text paragraph</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  count_pos_tags <span class="ot">&lt;-</span> <span class="cf">function</span>(text) {</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    parsed_text <span class="ot">&lt;-</span> <span class="fu">udpipe_annotate</span>(udmodel, <span class="at">x =</span> text)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    pos_tags <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(parsed_text)<span class="sc">$</span>upos</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    verb_count <span class="ot">&lt;-</span> <span class="fu">sum</span>(pos_tags <span class="sc">==</span> <span class="st">"VERB"</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    adj_count <span class="ot">&lt;-</span> <span class="fu">sum</span>(pos_tags <span class="sc">==</span> <span class="st">"ADJ"</span>)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    noun_count <span class="ot">&lt;-</span> <span class="fu">sum</span>(pos_tags <span class="sc">==</span> <span class="st">"NOUN"</span>)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">verbs =</span> verb_count, <span class="at">adjectives =</span> adj_count, <span class="at">nouns =</span> noun_count))</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">pos_counts =</span> <span class="fu">list</span>(<span class="fu">count_pos_tags</span>(<span class="sc">!!</span><span class="fu">sym</span>(text_column)))</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract the pos_counts list columns into separate columns</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">verbs =</span> <span class="fu">sapply</span>(pos_counts, <span class="cf">function</span>(x) x<span class="sc">$</span>verbs),</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>      <span class="at">adjectives =</span> <span class="fu">sapply</span>(pos_counts, <span class="cf">function</span>(x) x<span class="sc">$</span>adjectives),</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>      <span class="at">nouns =</span> <span class="fu">sapply</span>(pos_counts, <span class="cf">function</span>(x) x<span class="sc">$</span>nouns)</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>pos_counts) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rowid, content, content_clean, <span class="fu">everything</span>())  <span class="co"># Reorder columns as needed</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data)</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">extract_features</span>(data) </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">perform_ddr_analysis</span>(data, <span class="at">text_column =</span> <span class="st">"content_clean"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"^nrc_scores_"</span>, <span class="st">""</span>, <span class="fu">colnames</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_features.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>label)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   0    1 
+8870 2074 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data<span class="sc">$</span>label) <span class="co"># 1 for troll, 0 for not-troll</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as.tibble</span>(data)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">factor</span>(label, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>,<span class="st">"1"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="proportions-of-features-between-labels" class="level4">
+<h4 class="anchored" data-anchor-id="proportions-of-features-between-labels"><em>Proportions of features between labels</em></h4>
+<p>Since the labels are imbalanced, comparing the frequencies will not be much informative. Hence, we calculate the proportions of each features within each label and the ratios between them.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to calculate proportions and ratios</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>calculate_proportions_and_ratios <span class="ot">&lt;-</span> <span class="cf">function</span>(data, variables) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  proportions_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(label) <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(<span class="fu">all_of</span>(variables), <span class="sc">~</span> <span class="fu">sum</span>(.) <span class="sc">/</span> <span class="fu">sum</span>(total_words), <span class="at">.names =</span> <span class="st">"prop_{.col}"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">factor</span>(label, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">"Whole"</span>))</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>(data <span class="sc">%&gt;%</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">summarize</span>(</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">label =</span> <span class="st">"Whole"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">across</span>(<span class="fu">all_of</span>(variables), <span class="sc">~</span> <span class="fu">sum</span>(.) <span class="sc">/</span> <span class="fu">sum</span>(total_words), <span class="at">.names =</span> <span class="st">"prop_{.col}"</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>                ))</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  ratios_data <span class="ot">&lt;-</span> proportions_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"prop_"</span>), <span class="sc">~</span> . <span class="sc">/</span> <span class="fu">first</span>(.), <span class="at">.names =</span> <span class="st">"ratio_{.col}"</span>)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ratios_data)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the variables of interest</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>variables_of_interest <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n_curses"</span>, <span class="st">"n_punctuation_marks"</span>, <span class="st">"numbers_count"</span>,<span class="st">"n_capital_letters"</span>,</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"anger"</span>, <span class="st">"anticipation"</span>, <span class="st">"disgust"</span>, <span class="st">"fear"</span>, <span class="st">"joy"</span>, <span class="st">"sadness"</span>, <span class="st">"surprise"</span>, <span class="st">"trust"</span>,</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"negative"</span>, <span class="st">"positive"</span>, <span class="st">"afinn_sentiment"</span>, <span class="st">"verbs"</span>, <span class="st">"adjectives"</span>, <span class="st">"nouns"</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate proportions and ratios for the specified variables</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>proportions.ratios.data <span class="ot">&lt;-</span> <span class="fu">calculate_proportions_and_ratios</span>(data, variables_of_interest)</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>proportions.ratios.data <span class="ot">&lt;-</span> proportions.ratios.data <span class="sc">%&gt;%</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(label <span class="sc">!=</span> <span class="st">"Whole"</span>)</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>proportions.ratios.data<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(proportions.ratios.data<span class="sc">$</span>label) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="second-step---exploring-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="second-step---exploring-the-data">Second step - exploring the data</h2>
+<section id="setting-color-palette-and-theme" class="level4">
+<h4 class="anchored" data-anchor-id="setting-color-palette-and-theme"><em>Setting color palette and theme</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>myTheme <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">'serif'</span>, <span class="at">color =</span> <span class="st">"#000000"</span>),</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">'serif'</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">"#2c2c2c"</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">'serif'</span>, <span class="at">size =</span> <span class="dv">11</span>, <span class="at">color =</span> <span class="st">"#2c2c2c"</span>),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">'serif'</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">"#555555"</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">'serif'</span>, <span class="at">size =</span> <span class="dv">11</span>, <span class="at">color =</span> <span class="st">"#2c2c2c"</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">'serif'</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">"#555555"</span>),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">'serif'</span>, <span class="at">size =</span> <span class="dv">11</span>, <span class="at">color =</span> <span class="st">"#2c2c2c"</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">'serif'</span>, <span class="at">size =</span> <span class="dv">9</span>, <span class="at">color =</span> <span class="st">"#555555"</span>),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#ffffff"</span>),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#ffffff"</span>),</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#ffffff"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>word_counts_0 <span class="ot">&lt;-</span> data_label_0 <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>word_counts_1 <span class="ot">&lt;-</span> data_label_1 <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>word_cloud_0 <span class="ot">&lt;-</span> <span class="fu">wordcloud</span>(<span class="at">words =</span> word_counts_0<span class="sc">$</span>word, <span class="at">freq =</span> word_counts_0<span class="sc">$</span>n, <span class="at">scale=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="fl">0.5</span>), </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">colors=</span><span class="fu">brewer.pal</span>(<span class="dv">8</span>, <span class="st">"Set3"</span>), <span class="at">min.freq =</span> <span class="dv">1</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">random.order =</span> <span class="cn">FALSE</span>, <span class="at">rot.per =</span> <span class="fl">0.35</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">max.words =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>word_cloud_1 <span class="ot">&lt;-</span> <span class="fu">wordcloud</span>(<span class="at">words =</span> word_counts_1<span class="sc">$</span>word, <span class="at">freq =</span> word_counts_1<span class="sc">$</span>n, <span class="at">scale=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="fl">0.5</span>), </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">colors=</span><span class="fu">brewer.pal</span>(<span class="dv">8</span>, <span class="st">"Set3"</span>), <span class="at">min.freq =</span> <span class="dv">1</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">random.order =</span> <span class="cn">FALSE</span>, <span class="at">rot.per =</span> <span class="fl">0.35</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">max.words =</span> <span class="dv">150</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>udmodel <span class="ot">&lt;-</span> <span class="fu">udpipe_load_model</span>(<span class="st">"english-ewt-ud-2.5-191206.udpipe"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>UD00 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"UD00.csv"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>UD01 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"UD01.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="comparing-the-proportions-of-different-emotions-expressed-in-tweets-between-the-humans-and-trolls" class="level4">
+<h4 class="anchored" data-anchor-id="comparing-the-proportions-of-different-emotions-expressed-in-tweets-between-the-humans-and-trolls"><em>Comparing the proportions of different emotions expressed in tweets between the Humans and Trolls</em></h4>
+<p>First we checked positive and negative sentiments in general:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data) <span class="sc">+</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> label, <span class="at">y =</span> afinn_sentiment, <span class="at">fill =</span> label)) <span class="sc">+</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">25</span>, <span class="at">to =</span> <span class="dv">15</span>, <span class="at">by =</span> <span class="dv">5</span>)) <span class="sc">+</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Sentiment Distribution - AFINN"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  myTheme <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"lightsteelblue3"</span>, <span class="st">"mistyrose2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Then we compared the whole range of emotions spectrum:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the proportion of each emotion category within each label</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>proportions_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(label) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_anger =</span> <span class="fu">mean</span>(anger),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_anticipation =</span> <span class="fu">mean</span>(anticipation),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_disgust =</span> <span class="fu">mean</span>(disgust),</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_fear =</span> <span class="fu">mean</span>(fear),</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_joy =</span> <span class="fu">mean</span>(joy),</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_sadness =</span> <span class="fu">mean</span>(sadness),</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_surprise =</span> <span class="fu">mean</span>(surprise),</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_trust =</span> <span class="fu">mean</span>(trust)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the data to long format</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>proportions_data_long <span class="ot">&lt;-</span> proportions_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"mean_"</span>),</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"emotion"</span>,</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"proportion"</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a bar plot to compare proportions</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(proportions_data_long, <span class="fu">aes</span>(<span class="at">x =</span> emotion, <span class="at">y =</span> proportion, <span class="at">fill =</span> <span class="fu">factor</span>(label))) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Proportion"</span>, <span class="at">x =</span> <span class="st">"Emotion"</span>, <span class="at">fill =</span> <span class="st">"Label"</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"lightsteelblue3"</span>, <span class="st">"mistyrose2"</span>)) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  myTheme <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data_label_0<span class="fl">.2</span> <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(label <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>data_label_1<span class="fl">.2</span> <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(label <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create separate data frames for each emotion</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>emotions <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"anger"</span>, <span class="st">"anticipation"</span>, <span class="st">"disgust"</span>, <span class="st">"fear"</span>, <span class="st">"joy"</span>, <span class="st">"sadness"</span>, <span class="st">"surprise"</span>, <span class="st">"trust"</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list to store the plots</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>emotion_plots <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a loop to generate histograms for each emotion</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (emotion <span class="cf">in</span> emotions) {</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="at">data =</span> data_label_0<span class="fl">.2</span>, <span class="fu">aes</span>(<span class="at">x =</span> .data[[emotion]], <span class="at">fill =</span> <span class="st">"Humans"</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="at">data =</span> data_label_1<span class="fl">.2</span>, <span class="fu">aes</span>(<span class="at">x =</span> .data[[emotion]], <span class="at">fill =</span> <span class="st">"Trolls"</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Distribution of"</span>, emotion, <span class="st">"by Label"</span>),</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> emotion,</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Humans"</span> <span class="ot">=</span> <span class="st">"lightsteelblue1"</span>, <span class="st">"Trolls"</span> <span class="ot">=</span> <span class="st">"mistyrose"</span>)) <span class="sc">+</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    myTheme</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  emotion_plots[[emotion]] <span class="ot">&lt;-</span> p</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>emotion_plots</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$anger</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$anticipation</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$disgust</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-23-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$fear</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-23-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$joy</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-23-5.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$sadness</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-23-6.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$surprise</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-23-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$trust</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-23-8.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Proportions of Negative emotions is bigger for trolls than humans.</p>
+</section>
+<section id="examining-the-proportion-of-parts-of-speech-pos-and-the-frequency-of-verbs-adjectives-and-nouns-in-each-label" class="level4">
+<h4 class="anchored" data-anchor-id="examining-the-proportion-of-parts-of-speech-pos-and-the-frequency-of-verbs-adjectives-and-nouns-in-each-label"><em>Examining the proportion of parts of speech (POS) and the frequency of verbs, adjectives and nouns in each label:</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the total number of words for data_label_0</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>total_words_0 <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">sapply</span>(data_label_0<span class="sc">$</span>word, <span class="cf">function</span>(text) <span class="fu">length</span>(<span class="fu">unlist</span>(<span class="fu">strsplit</span>(text, <span class="st">" "</span>)))))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Total words for data_label_0:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Total words for data_label_0:"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(total_words_0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 116691</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the total number of words for data_label_1</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>total_words_1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">sapply</span>(data_label_1<span class="sc">$</span>word, <span class="cf">function</span>(text) <span class="fu">length</span>(<span class="fu">unlist</span>(<span class="fu">strsplit</span>(text, <span class="st">" "</span>)))))</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Total words for data_label_1:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Total words for data_label_1:"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(total_words_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29507</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>sum_pos_frequencies <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sum the frequencies of verbs, adjectives, and nouns separately</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  total_verbs <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>verbs)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  total_adjectives <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>adjectives)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  total_nouns <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>nouns)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the sums as a list</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  sums <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">verbs =</span> total_verbs, <span class="at">adjectives =</span> total_adjectives, <span class="at">nouns =</span> total_nouns)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sums)</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>sums.pos.data<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">sum_pos_frequencies</span>(data_label_0<span class="fl">.2</span>)</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>sums.pos.data<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">sum_pos_frequencies</span>(data_label_1<span class="fl">.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the proportions for data_label_0.2</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>proportions_0<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sums.pos.data<span class="fl">.0</span>, <span class="cf">function</span>(count) count <span class="sc">/</span> total_words_0)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the proportions for data_label_1.2</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>proportions_1<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sums.pos.data<span class="fl">.1</span>, <span class="cf">function</span>(count) count <span class="sc">/</span> total_words_1)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the proportions for data_label_0.2</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(proportions_0<span class="fl">.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$verbs
+[1] 0.1525139
+
+$adjectives
+[1] 0.06647471
+
+$nouns
+[1] 0.1952336</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the proportions for data_label_1.2</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(proportions_1<span class="fl">.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$verbs
+[1] 0.159962
+
+$adjectives
+[1] 0.06761108
+
+$nouns
+[1] 0.2118141</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame for the proportions</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>proportions_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Label =</span> <span class="fu">c</span>(<span class="st">"Label 0"</span>, <span class="st">"Label 1"</span>),</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Nouns =</span> <span class="fu">c</span>(proportions_0<span class="fl">.2</span><span class="sc">$</span>nouns, proportions_1<span class="fl">.2</span><span class="sc">$</span>nouns),</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Adjectives =</span> <span class="fu">c</span>(proportions_0<span class="fl">.2</span><span class="sc">$</span>adjectives, proportions_1<span class="fl">.2</span><span class="sc">$</span>adjectives),</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Verbs =</span> <span class="fu">c</span>(proportions_0<span class="fl">.2</span><span class="sc">$</span>verbs, proportions_1<span class="fl">.2</span><span class="sc">$</span>verbs)</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Melt the data frame for ggplot2</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>proportions_melted <span class="ot">&lt;-</span> <span class="fu">melt</span>(proportions_df, <span class="at">id.vars =</span> <span class="st">"Label"</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the grouped bar chart</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>custom_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Nouns"</span> <span class="ot">=</span> <span class="st">"lightsteelblue3"</span>, <span class="st">"Adjectives"</span> <span class="ot">=</span> <span class="st">"mistyrose2"</span>,</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Verbs"</span> <span class="ot">=</span> <span class="st">"moccasin"</span>)</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(proportions_melted, <span class="fu">aes</span>(<span class="at">x =</span> Label, <span class="at">y =</span> value, <span class="at">fill =</span> variable)) <span class="sc">+</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Proportions of Nouns, Adjectives, and Verbs (Label 0 vs. Label 1)"</span>,</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Label"</span>,</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Part of Speech"</span></span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> custom_colors) <span class="sc">+</span> </span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>  myTheme </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The analysis shows us that there is no significant difference between Humans and Trolls, so most likely, this data will not be included in the final models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the function to calculate numerical features</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>calculate_numerical_features <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  numerical_features <span class="ot">&lt;-</span> data[, <span class="fu">sapply</span>(data, is.numeric)]</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(numerical_features)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>data.numeric<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">calculate_numerical_features</span>(data_label_0<span class="fl">.2</span>)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>data.numeric<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">calculate_numerical_features</span>(data_label_1<span class="fl">.2</span>)</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset for exploration</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>selected_features <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"content_length"</span>, </span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"vocab_richness"</span>, </span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n_capital_letters"</span>, </span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n_punctuation_marks"</span>, </span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unique_words"</span></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>data.numeric<span class="fl">.0</span> <span class="ot">&lt;-</span> data.numeric<span class="fl">.0</span>[, selected_features]</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>data.numeric<span class="fl">.1</span> <span class="ot">&lt;-</span> data.numeric<span class="fl">.1</span>[, selected_features]</span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>plot_correlation_heatmap <span class="ot">&lt;-</span> <span class="cf">function</span>(data, title) {</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a correlation matrix</span></span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a>  corr_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(data)  <span class="co"># Use 'data' here instead of 'numerical_features'</span></span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Melt the correlation matrix for plotting</span></span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>  corr_melted <span class="ot">&lt;-</span> <span class="fu">melt</span>(corr_matrix)</span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create the heatmap</span></span>
+<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(corr_melted, <span class="fu">aes</span>(Var1, Var2, <span class="at">fill =</span> value)) <span class="sc">+</span></span>
+<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb47-33"><a href="#cb47-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"lightsteelblue1"</span>, <span class="at">high =</span> <span class="st">"lightsteelblue4"</span>) <span class="sc">+</span></span>
+<span id="cb47-34"><a href="#cb47-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb47-35"><a href="#cb47-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Correlation Heatmap for"</span>, title),</span>
+<span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Feature"</span>,</span>
+<span id="cb47-37"><a href="#cb47-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">""</span></span>
+<span id="cb47-38"><a href="#cb47-38" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb47-39"><a href="#cb47-39" aria-hidden="true" tabindex="-1"></a>    myTheme <span class="sc">+</span></span>
+<span id="cb47-40"><a href="#cb47-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(title) <span class="sc">+</span></span>
+<span id="cb47-41"><a href="#cb47-41" aria-hidden="true" tabindex="-1"></a>     <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb47-42"><a href="#cb47-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-43"><a href="#cb47-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-44"><a href="#cb47-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the correlation heatmap for data_label_0.2</span></span>
+<span id="cb47-45"><a href="#cb47-45" aria-hidden="true" tabindex="-1"></a>heatmap_0<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">plot_correlation_heatmap</span>(data.numeric<span class="fl">.0</span>, <span class="st">"Humans"</span>)</span>
+<span id="cb47-46"><a href="#cb47-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-47"><a href="#cb47-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the correlation heatmap for data_label_1.2</span></span>
+<span id="cb47-48"><a href="#cb47-48" aria-hidden="true" tabindex="-1"></a>heatmap_1<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">plot_correlation_heatmap</span>(data.numeric<span class="fl">.1</span>, <span class="st">"Trolls"</span>)</span>
+<span id="cb47-49"><a href="#cb47-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-50"><a href="#cb47-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange the heatmaps in a grid</span></span>
+<span id="cb47-51"><a href="#cb47-51" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(heatmap_0<span class="fl">.2</span>, heatmap_1<span class="fl">.2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">top =</span> <span class="st">"Correlation Heatmaps between features"</span>, <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb47-52"><a href="#cb47-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+</section>
+<section id="examining-the-proportion-of-curses-used-by-humans-compared-to-trolls" class="level4">
+<h4 class="anchored" data-anchor-id="examining-the-proportion-of-curses-used-by-humans-compared-to-trolls"><em>Examining the proportion of curses used by humans compared to trolls</em></h4>
+<p>Since trolling is mostly harmful behavior, the number of curses trolls use might be in larger proportions than humans</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate proportions for label 0</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>n_curses_0 <span class="ot">&lt;-</span> <span class="fu">sum</span>(data_label_0<span class="fl">.2</span><span class="sc">$</span>n_curses)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>n_curses_proportion_0 <span class="ot">&lt;-</span> n_curses_0 <span class="sc">/</span> total_words_0</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate proportions for label 1</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>n_curses_1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(data_label_1<span class="fl">.2</span><span class="sc">$</span>n_curses)</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>n_curses_proportion_1 <span class="ot">&lt;-</span> n_curses_1 <span class="sc">/</span> total_words_1</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>curses_0 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"curses"</span>),</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">proportion =</span> <span class="fu">c</span>(n_curses_proportion_0),</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"Humans"</span></span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame for label 1</span></span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>curses_1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"curses"</span>),</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">proportion =</span> <span class="fu">c</span>(n_curses_proportion_1),</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"Trolls"</span></span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine label 0 and label 1 data</span></span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>combined_textual_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(curses_0, curses_1)</span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_textual_data, <span class="fu">aes</span>(<span class="at">x =</span> label, <span class="at">y =</span> proportion, <span class="at">fill =</span> label)) <span class="sc">+</span></span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Humans"</span> <span class="ot">=</span> <span class="st">"lightsteelblue3"</span>, <span class="st">"Trolls"</span> <span class="ot">=</span> <span class="st">"mistyrose2"</span>)) <span class="sc">+</span></span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Proportion of Curses by Label"</span>,</span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Label"</span>,</span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span></span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>  myTheme <span class="sc">+</span></span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">scale =</span> <span class="dv">1</span>))  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="third-step---classification-models" class="level2">
+<h2 class="anchored" data-anchor-id="third-step---classification-models">Third step - Classification Models</h2>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">1. Logistic Regression:</h3>
+<p>As a renowned parametric model in machine learning, logistic regression excels in binary classification scenarios where the outcome variable is binary, generating probabilistic results. Its primary advantage stems from its ability to evaluate the impact of individual features on the outcome variable. This provides valuable insights into the relationship between variables. Furthermore, logistic regression assumes a linear relationship between the features and the log-odds of the binary response.</p>
+<p>We opted for Lasso regularization model to enhance predictive accuracy. By adjusting the alpha. This enables us to select influential predictors while mitigating the impact of unhelpful ones, improving the predictive model’s performance.</p>
+<section id="addressing-imbalanced-labels-reflection-of-real-world-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="addressing-imbalanced-labels-reflection-of-real-world-distribution"><em>Addressing Imbalanced Labels: Reflection of Real-World Distribution</em></h4>
+<p>An inherent characteristic of the data was the notable class imbalance, with a substantial disparity between the number of tweets from bots and the more significant number of tweets from real individuals. It can be assumed that this class imbalance directly reflected the prevailing distribution observed in the real world rather than altering the base rate to artificially balance the classes during model development, a conscious decision was made to acknowledge and embrace this imbalance as an accurate representation of the underlying distribution in the population of interest. This decision was based on the understanding that the models intended to perform optimally in real-world conditions, where the occurrence of bot-generated content is inherently less frequent than genuine user-generated content. Therefore, by allowing the models to learn from the imbalanced data, we aimed to ensure their robustness and applicability to the test data.</p>
+</section>
+<section id="split-data-into-test-and-train" class="level4">
+<h4 class="anchored" data-anchor-id="split-data-into-test-and-train"><em>Split data into test and train</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>content,<span class="sc">-</span>rowid, <span class="sc">-</span>content_clean,<span class="sc">-</span>url_count)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>shuffled_data <span class="ot">&lt;-</span> data[<span class="fu">sample</span>(<span class="fu">nrow</span>(data)), ]</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and testing sets, ensuring that related rows stay together</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>data.indxTrain <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> shuffled_data<span class="sc">$</span>label , <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>data.train <span class="ot">&lt;-</span> shuffled_data[data.indxTrain,]</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>data.test <span class="ot">&lt;-</span>  shuffled_data[<span class="sc">-</span>data.indxTrain,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fitting-logistic-regression-with-lasso-regularization" class="level4">
+<h4 class="anchored" data-anchor-id="fitting-logistic-regression-with-lasso-regularization"><em>Fitting logistic regression with Lasso Regularization:</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(label<span class="sc">~</span>., data.train)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(data.train<span class="sc">$</span>label)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>model<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> <span class="cn">NULL</span>)</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>cv.lasso <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the final model on the training data</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>model.final <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="st">"binomial"</span>,</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">lambda =</span> cv.lasso<span class="sc">$</span>lambda.min)</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display regression coefficients</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(model.final)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>26 x 1 sparse Matrix of class "dgCMatrix"
+                              s0
+(Intercept)         -2.021077249
+(Intercept)          .          
+hashtags_count       0.168188142
+mentions_count       .          
+content_length      -0.009861902
+vocab_richness      -0.002828845
+n_capital_letters    0.062380254
+n_punctuation_marks  0.029053003
+n_curses             0.729994521
+unique_words         0.054246272
+total_words         -0.054908531
+numbers_count        0.030793640
+anger               -0.298908520
+anticipation         0.064078333
+disgust              0.373013392
+fear                -0.020855964
+joy                 -0.116860535
+sadness              0.029923200
+surprise            -0.071006108
+trust                0.095280517
+negative             0.070118713
+positive            -0.022289000
+afinn_sentiment     -0.135060655
+verbs                0.138801661
+adjectives           0.046805110
+nouns                0.073466514</code></pre>
+</div>
+</div>
+</section>
+<section id="prediction" class="level4">
+<h4 class="anchored" data-anchor-id="prediction"><em>Prediction</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># make predictions on the test data</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>x.test <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(label <span class="sc">~</span>., data.test)</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>y.test <span class="ot">&lt;-</span> <span class="fu">c</span>(data.test<span class="sc">$</span>label)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test data)</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(model.final, <span class="at">s =</span> cv.lasso<span class="sc">$</span>lambda.min, <span class="at">newx =</span> x.test, <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>y.pred.proba <span class="ot">&lt;-</span> model.final <span class="sc">%&gt;%</span> <span class="fu">predict</span>(<span class="at">newx =</span> x.test)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>y.pred.proba <span class="ot">&lt;-</span> y.pred.proba[, <span class="dv">1</span>]</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>y.pred.class <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y.pred.proba <span class="sc">&gt;</span> threshold, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>y.pred.class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(y.pred.class)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>y.pred.class_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(y.pred.class, <span class="at">levels =</span> <span class="fu">levels</span>(y))</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>confusion_matrix <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(<span class="at">data =</span> y.pred.class,</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">reference =</span> y.test)</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>confusion_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction    0    1
+         0 2635  591
+         1   26   31
+                                          
+               Accuracy : 0.8121          
+                 95% CI : (0.7983, 0.8253)
+    No Information Rate : 0.8105          
+    P-Value [Acc &gt; NIR] : 0.4223          
+                                          
+                  Kappa : 0.0615          
+                                          
+ Mcnemar's Test P-Value : &lt;2e-16          
+                                          
+            Sensitivity : 0.99023         
+            Specificity : 0.04984         
+         Pos Pred Value : 0.81680         
+         Neg Pred Value : 0.54386         
+             Prevalence : 0.81054         
+         Detection Rate : 0.80262         
+   Detection Prevalence : 0.98264         
+      Balanced Accuracy : 0.52003         
+                                          
+       'Positive' Class : 0               
+                                          </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> confusion_matrix<span class="sc">$</span>overall[<span class="st">"Accuracy"</span>]</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>precision <span class="ot">&lt;-</span> confusion_matrix<span class="sc">$</span>byClass[<span class="st">"Precision"</span>]</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>recall <span class="ot">&lt;-</span> confusion_matrix<span class="sc">$</span>byClass[<span class="st">"Recall"</span>]</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>f1_score <span class="ot">&lt;-</span> confusion_matrix<span class="sc">$</span>byClass[<span class="st">"F1"</span>]</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>auc <span class="ot">&lt;-</span> pROC<span class="sc">::</span><span class="fu">roc</span>(data.test<span class="sc">$</span>label, y.pred.proba)</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>auc_value <span class="ot">&lt;-</span> auc<span class="sc">$</span>auc</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the confusion matrix to a data frame</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>conf_matrix_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.table</span>(confusion_matrix))</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(conf_matrix_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Reference"</span>, <span class="st">"Prediction"</span>, <span class="st">"Count"</span>)</span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>conf_matrix_df<span class="sc">$</span>class<span class="ot">=</span><span class="fu">c</span>(<span class="st">"TN"</span>,<span class="st">"FN"</span>,<span class="st">"FP"</span>,<span class="st">"TP"</span>)</span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>conf_matrix_df<span class="sc">$</span>mat.label<span class="ot">=</span><span class="fu">paste</span>(conf_matrix_df<span class="sc">$</span>Count,conf_matrix_df<span class="sc">$</span>class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>conf_matrix_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(conf_matrix_df, <span class="fu">aes</span>(<span class="at">x =</span> Reference, <span class="at">y =</span> Prediction, <span class="at">fill =</span> Count)) <span class="sc">+</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> mat.label), <span class="at">family =</span> <span class="st">'serif'</span>) <span class="sc">+</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"lightsteelblue1"</span>, <span class="at">high =</span> <span class="st">"lightsteelblue4"</span>) <span class="sc">+</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Confusion Matrix- Logistic regression Model"</span>,</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Reference"</span>,</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Prediction"</span>) <span class="sc">+</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  myTheme</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(conf_matrix_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="assessing-model-performance" class="level4">
+<h4 class="anchored" data-anchor-id="assessing-model-performance"><em>Assessing model performance</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with the metrics and labels</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>metrics_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metric =</span> <span class="fu">c</span>(<span class="st">"Accuracy"</span>, <span class="st">"Precision"</span>, <span class="st">"Recall"</span>, <span class="st">"F1 Score"</span>, <span class="st">"AUC"</span>),</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="fu">c</span>(accuracy, precision, recall, f1_score, auc_value),</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, <span class="fu">c</span>(accuracy, precision, recall, f1_score, auc_value))  <span class="co"># Format values with two decimal places</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a custom color palette for the bars</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>custom_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Accuracy"</span> <span class="ot">=</span> <span class="st">"lightsteelblue1"</span>,</span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Precision"</span> <span class="ot">=</span> <span class="st">"mistyrose1"</span>,</span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Recall"</span> <span class="ot">=</span> <span class="st">"moccasin"</span>,</span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"F1 Score"</span> <span class="ot">=</span> <span class="st">"#bd7ebe"</span>,</span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AUC"</span> <span class="ot">=</span> <span class="st">"thistle1"</span>)</span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a bar plot for the metrics</span></span>
+<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a>metrics_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metrics_df, <span class="fu">aes</span>(<span class="at">x =</span> Metric, <span class="at">y =</span> Value, <span class="at">fill =</span> Metric)) <span class="sc">+</span></span>
+<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Label),<span class="at">vjust=</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">angle =</span> <span class="dv">45</span>) <span class="sc">+</span></span>
+<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Model Metrics"</span>,</span>
+<span id="cb58-21"><a href="#cb58-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Value"</span>) <span class="sc">+</span></span>
+<span id="cb58-22"><a href="#cb58-22" aria-hidden="true" tabindex="-1"></a>  myTheme <span class="sc">+</span></span>
+<span id="cb58-23"><a href="#cb58-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb58-24"><a href="#cb58-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span> custom_colors)<span class="co"># Rotate x-axis labels for better readability</span></span>
+<span id="cb58-25"><a href="#cb58-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-26"><a href="#cb58-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the metrics plot</span></span>
+<span id="cb58-27"><a href="#cb58-27" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(metrics_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="accuracy" class="level4">
+<h4 class="anchored" data-anchor-id="accuracy"><strong><em>Accuracy</em></strong></h4>
+</section>
+<section id="textaccuracy-fractexttp-texttntexttp-texttn-textfp-textfn-81" class="level4">
+<h4 class="anchored" data-anchor-id="textaccuracy-fractexttp-texttntexttp-texttn-textfp-textfn-81"><span class="math inline">\(\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}\)</span> = <span class="math inline">\(81\%\)</span></h4>
+</section>
+<section id="precision-positive-predictive-value-ppv" class="level4">
+<h4 class="anchored" data-anchor-id="precision-positive-predictive-value-ppv"><em>Precision (Positive P$redictive Value, PPV)</em></h4>
+</section>
+<section id="textprecision-fractptexttp-textfp-82" class="level4">
+<h4 class="anchored" data-anchor-id="textprecision-fractptexttp-textfp-82"><span class="math inline">\(\text{Precision} = \frac{{TP}}{\text{TP} + \text{FP}}\)</span> = $82%$</h4>
+</section>
+<section id="recall-sensitivity-true-positive-rate-tpr" class="level4">
+<h4 class="anchored" data-anchor-id="recall-sensitivity-true-positive-rate-tpr"><strong><em>Recall (Sensitivity, True Positive Rate, TPR)</em></strong></h4>
+</section>
+<section id="textrecall-fractexttptexttp-textfn-99" class="level4">
+<h4 class="anchored" data-anchor-id="textrecall-fractexttptexttp-textfn-99"><span class="math inline">\(\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}\)</span> = <span class="math inline">\(99\%\)</span></h4>
+</section>
+<section id="specificity-true-negative-rate-tnr" class="level4">
+<h4 class="anchored" data-anchor-id="specificity-true-negative-rate-tnr"><strong><em>Specificity (True Negative Rate, TNR)</em></strong></h4>
+</section>
+<section id="textspecificity-fractexttntexttn-textfp-99" class="level4">
+<h4 class="anchored" data-anchor-id="textspecificity-fractexttntexttn-textfp-99"><span class="math inline">\(\text{Specificity} = \frac{\text{TN}}{\text{TN} + \text{FP}}\)</span> = <span class="math inline">\(99\%\)</span></h4>
+</section>
+<section id="f-1-score" class="level4">
+<h4 class="anchored" data-anchor-id="f-1-score"><strong><em>F-1 Score</em></strong></h4>
+</section>
+<section id="textf1-score-2-cdot-fractextprecision-cdot-textrecalltextprecision-textrecall-90" class="level4">
+<h4 class="anchored" data-anchor-id="textf1-score-2-cdot-fractextprecision-cdot-textrecalltextprecision-textrecall-90"><span class="math inline">\(\text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}\)</span> = <span class="math inline">\(90\%\)</span></h4>
+</section>
+<section id="make-a-roc-curve" class="level4">
+<h4 class="anchored" data-anchor-id="make-a-roc-curve">Make a ROC Curve</h4>
+<p>The ROC curve is a graph that shows how a binary classifier (e.g., logistic regression) performs at different classification thresholds. It plots the True Positive Rate (TPR) against the False Positive Rate (FPR). The curve is expected to be above the diagonal (representing random guessing) and towards the top-left corner (indicating better performance). The Area Under the Curve (AUC) summarizes the model’s overall performance: 1 for perfect, 0.5 for random. Higher AUC means better discrimination power. It helps when dealing with imbalanced datasets.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a ROC curve</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>roc_curve <span class="ot">&lt;-</span> <span class="fu">roc</span>(data.test<span class="sc">$</span>label, y.pred.proba)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>roc_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">FPR =</span> <span class="dv">1</span> <span class="sc">-</span> roc_curve<span class="sc">$</span>specificities,</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">TPR =</span> roc_curve<span class="sc">$</span>sensitivities</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>roc_auc <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">auc</span>(roc_curve), <span class="dv">2</span>)</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>roc_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(roc_data, <span class="fu">aes</span>(<span class="at">x =</span> FPR, <span class="at">y =</span> TPR)) <span class="sc">+</span></span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"lightsteelblue4"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> TPR, <span class="at">fill =</span> <span class="st">"ROC Area"</span>),</span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">linetype =</span> <span class="dv">0</span>, <span class="at">fill =</span> <span class="st">"lightsteelblue1"</span>) <span class="sc">+</span></span>
+<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"mistyrose3"</span>) <span class="sc">+</span></span>
+<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"ROC Curve Model: AUC ="</span>, roc_auc),</span>
+<span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"False Positive Rate (1 - Specificity)"</span>,</span>
+<span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"True Positive Rate (Sensitivity)"</span>,</span>
+<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb59-20"><a href="#cb59-20" aria-hidden="true" tabindex="-1"></a>  myTheme</span>
+<span id="cb59-21"><a href="#cb59-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-22"><a href="#cb59-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the plot</span></span>
+<span id="cb59-23"><a href="#cb59-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(roc_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="random-forest" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest">Random forest</h3>
+<p>Random forest is a machine learning technique that combines many decision trees to make predictions. Decision tree splits the data into smaller data groups based on the features of the data until they have a small enough set of data.</p>
+<p>Random forests reduce overfitting and improve accuracy by using multiple uncorrelated decision trees. They work by bagging (bootstrapping) data samples and using feature randomness to create diverse trees. Random forests have parameters to set so you can make your predictions more accurate, and they’re good for both classification and regression tasks. They help prevent overfitting, handle imbalacnaced data (whats good to our case), and make it easy to assess feature importance.</p>
+<section id="fitting-a-random-forest-with-cv-on-train-data-using-caret" class="level4">
+<h4 class="anchored" data-anchor-id="fitting-a-random-forest-with-cv-on-train-data-using-caret"><em>Fitting a Random Forest with cv on train data using caret:</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>data.indxTrain <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> data<span class="sc">$</span>label , <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>data.train <span class="ot">&lt;-</span> data[data.indxTrain,]</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>data.test <span class="ot">&lt;-</span>  data[<span class="sc">-</span>data.indxTrain,]</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>num_col <span class="ot">&lt;-</span> <span class="fu">ncol</span>(data.train)</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>num_col <span class="co">#25 column, 24 predictors</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>data.train <span class="ot">&lt;-</span> data.train <span class="sc">%&gt;%</span></span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">factor</span>(label, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>)))</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>data.test <span class="ot">&lt;-</span> data.test <span class="sc">%&gt;%</span></span>
+<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">factor</span>(label, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>)))</span>
+<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a>tc<span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method=</span><span class="st">"cv"</span>, </span>
+<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>                          <span class="at">number=</span><span class="dv">10</span>)</span>
+<span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a>tg <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">mtry =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">24</span>))</span>
+<span id="cb60-22"><a href="#cb60-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-23"><a href="#cb60-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-24"><a href="#cb60-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Train a Random Forest model</span></span>
+<span id="cb60-25"><a href="#cb60-25" aria-hidden="true" tabindex="-1"></a>fit.rf <span class="ot">&lt;-</span> <span class="fu">train</span>(label <span class="sc">~</span> ., </span>
+<span id="cb60-26"><a href="#cb60-26" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> data.train,</span>
+<span id="cb60-27"><a href="#cb60-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">method =</span> <span class="st">"rf"</span>,</span>
+<span id="cb60-28"><a href="#cb60-28" aria-hidden="true" tabindex="-1"></a>                <span class="at">tuneGrid =</span> tg,</span>
+<span id="cb60-29"><a href="#cb60-29" aria-hidden="true" tabindex="-1"></a>                <span class="at">trControl =</span> tc)</span>
+<span id="cb60-30"><a href="#cb60-30" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit.rf)</span>
+<span id="cb60-31"><a href="#cb60-31" aria-hidden="true" tabindex="-1"></a>fit.rf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the random forests:</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>prd.rf <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit.rf, data.test)</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>cm_rf <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(prd.rf, data.test<span class="sc">$</span>label)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the confusion matrix to a data frame</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>conf_matrix_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.table</span>(cm_rf))</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(conf_matrix_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Reference"</span>, <span class="st">"Prediction"</span>, <span class="st">"Count"</span>)</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>conf_matrix_df<span class="sc">$</span>class<span class="ot">=</span><span class="fu">c</span>(<span class="st">"TN"</span>,<span class="st">"FN"</span>,<span class="st">"FP"</span>,<span class="st">"TP"</span>)</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>conf_matrix_df<span class="sc">$</span>mat.label<span class="ot">=</span><span class="fu">paste</span>(conf_matrix_df<span class="sc">$</span>Count,conf_matrix_df<span class="sc">$</span>class)</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>conf_matrix_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(conf_matrix_df, <span class="fu">aes</span>(<span class="at">x =</span> Reference, <span class="at">y =</span> Prediction, <span class="at">fill =</span> Count)) <span class="sc">+</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> mat.label), <span class="at">family =</span> <span class="st">'serif'</span>) <span class="sc">+</span></span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"lightsteelblue1"</span>, <span class="at">high =</span> <span class="st">"lightsteelblue4"</span>) <span class="sc">+</span></span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Confusion Matrix- Logistic regression Model"</span>,</span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Reference"</span>,</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Prediction"</span>) <span class="sc">+</span></span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>  myTheme</span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(conf_matrix_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract relevant metrics from the confusion matrix</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>accuracy_rf <span class="ot">&lt;-</span> cm_rf<span class="sc">$</span>overall[<span class="st">"Accuracy"</span>]</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>precision_rf <span class="ot">&lt;-</span> cm_rf<span class="sc">$</span>byClass[<span class="st">"Precision"</span>]</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>recall_rf <span class="ot">&lt;-</span> cm_rf<span class="sc">$</span>byClass[<span class="st">"Recall"</span>]</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>f1_score_rf <span class="ot">&lt;-</span> cm_rf<span class="sc">$</span>byClass[<span class="st">'F1'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="accuracy-1" class="level4">
+<h4 class="anchored" data-anchor-id="accuracy-1"><strong><em>Accuracy</em></strong></h4>
+</section>
+<section id="textaccuracy-fractexttp-texttntexttp-texttn-textfp-textfn-81.5" class="level4">
+<h4 class="anchored" data-anchor-id="textaccuracy-fractexttp-texttntexttp-texttn-textfp-textfn-81.5"><span class="math inline">\(\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}\)</span> = <span class="math inline">\(81.5\%\)</span></h4>
+</section>
+<section id="precision-positive-predictive-value-ppv-1" class="level4">
+<h4 class="anchored" data-anchor-id="precision-positive-predictive-value-ppv-1"><em>Precision (Positive P$redictive Value, PPV)</em></h4>
+</section>
+<section id="textprecision-fractptexttp-textfp-81.8" class="level4">
+<h4 class="anchored" data-anchor-id="textprecision-fractptexttp-textfp-81.8"><span class="math inline">\(\text{Precision} = \frac{{TP}}{\text{TP} + \text{FP}}\)</span> = <span class="math inline">\(81.8\%\)</span></h4>
+</section>
+<section id="recall-sensitivity-true-positive-rate-tpr-1" class="level4">
+<h4 class="anchored" data-anchor-id="recall-sensitivity-true-positive-rate-tpr-1"><strong><em>Recall (Sensitivity, True Positive Rate, TPR)</em></strong></h4>
+</section>
+<section id="textrecall-fractexttptexttp-textfn-99-1" class="level4">
+<h4 class="anchored" data-anchor-id="textrecall-fractexttptexttp-textfn-99-1"><span class="math inline">\(\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}\)</span> = <span class="math inline">\(99\%\)</span></h4>
+</section>
+<section id="f-1-score-1" class="level4">
+<h4 class="anchored" data-anchor-id="f-1-score-1"><strong><em>F-1 Score</em></strong></h4>
+</section>
+<section id="textf1-score-2-cdot-fractextprecision-cdot-textrecalltextprecision-textrecall-89.7" class="level4">
+<h4 class="anchored" data-anchor-id="textf1-score-2-cdot-fractextprecision-cdot-textrecalltextprecision-textrecall-89.7"><span class="math inline">\(\text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}\)</span> = <span class="math inline">\(89.7\%\)</span></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>rf_importance <span class="ot">&lt;-</span><span class="fu">varImp</span>(fit.rf<span class="sc">$</span>finalModel)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>rf_importance_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(rf_importance, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(<span class="fu">rownames</span>(rf_importance), Overall), <span class="at">y =</span> Overall)) <span class="sc">+</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"lightsteelblue1"</span>) <span class="sc">+</span>  </span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(Overall, <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  </span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Random Forest Feature Importances"</span>,</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Predictor"</span>,</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Importance"</span>) <span class="sc">+</span></span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>  myTheme </span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rf_importance_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Final_Assignment_trolls_detection_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+</section>
+</section>
+<section id="support-vector-machine-svm" class="level2">
+<h2 class="anchored" data-anchor-id="support-vector-machine-svm">Support Vector Machine (SVM)</h2>
+<p>As a versatile supervised machine learning algorithm, SVM proved valuable for both classification and regression tasks. Notably, SVM excels at determining the optimal decision boundary between vectors belonging to a specific category and those that don’t. Its ability to solve complex classification problems makes it a compelling candidate for investigation.</p>
+<p>By developing and evaluating these three models, we sought to unravel the strengths and weaknesses of each, ultimately identifying the most accurate and fitting model to address the challenge of detecting bots among Twitter tweets.</p>
+<section id="fitting-svm-model-on-the-training-data" class="level4">
+<h4 class="anchored" data-anchor-id="fitting-svm-model-on-the-training-data"><em>Fitting SVM model on the training data</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>data.indxTrain <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> data<span class="sc">$</span>label , <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>data.train <span class="ot">&lt;-</span> data[data.indxTrain,]</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>data.test <span class="ot">&lt;-</span>  data[<span class="sc">-</span>data.indxTrain,]</span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the SVM model</span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>tc<span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method=</span><span class="st">"cv"</span>, </span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">number=</span><span class="dv">10</span>)</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>svm_model <span class="ot">&lt;-</span> <span class="fu">svm</span>(label <span class="sc">~</span> ., <span class="at">data =</span> data.train, <span class="at">kernel =</span> <span class="st">"radial"</span>, <span class="at">cost =</span> <span class="dv">1</span>, <span class="at">trControl =</span> tc, <span class="at">tuneLength =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="predict-for-the-test-data-and-evaluate-performance" class="level4">
+<h4 class="anchored" data-anchor-id="predict-for-the-test-data-and-evaluate-performance"><em>predict for the test data and evaluate performance</em></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test data</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>predictions_svm  <span class="ot">&lt;-</span> <span class="fu">predict</span>(svm_model, <span class="at">newdata =</span> data.test)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>cm_svm <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(predictions_svm, data.test<span class="sc">$</span>label)</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the performance of the SVM model</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>accuracy_svm <span class="ot">&lt;-</span> cm_svm<span class="sc">$</span>overall[<span class="st">"Accuracy"</span>]</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>precision_svm <span class="ot">&lt;-</span> cm_svm<span class="sc">$</span>byClass[<span class="st">"Precision"</span>]</span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>recall_svm <span class="ot">&lt;-</span> cm_svm<span class="sc">$</span>byClass[<span class="st">"Recall"</span>]</span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>f1_score_svm <span class="ot">&lt;-</span> cm_svm<span class="sc">$</span>byClass[<span class="st">"F1"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="accuracy-2" class="level4">
+<h4 class="anchored" data-anchor-id="accuracy-2"><strong><em>Accuracy</em></strong></h4>
+</section>
+<section id="textaccuracy-fractexttp-texttntexttp-texttn-textfp-textfn-81.1" class="level4">
+<h4 class="anchored" data-anchor-id="textaccuracy-fractexttp-texttntexttp-texttn-textfp-textfn-81.1"><span class="math inline">\(\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}\)</span> = <span class="math inline">\(81.1\%\)</span></h4>
+</section>
+<section id="precision-positive-predictive-value-ppv-2" class="level4">
+<h4 class="anchored" data-anchor-id="precision-positive-predictive-value-ppv-2"><em>Precision (Positive P$redictive Value, PPV)</em></h4>
+</section>
+<section id="textprecision-fractptexttp-textfp-81.2" class="level4">
+<h4 class="anchored" data-anchor-id="textprecision-fractptexttp-textfp-81.2"><span class="math inline">\(\text{Precision} = \frac{{TP}}{\text{TP} + \text{FP}}\)</span> = <span class="math inline">\(81.2\%\)</span></h4>
+</section>
+<section id="recall-sensitivity-true-positive-rate-tpr-2" class="level4">
+<h4 class="anchored" data-anchor-id="recall-sensitivity-true-positive-rate-tpr-2"><strong><em>Recall (Sensitivity, True Positive Rate, TPR)</em></strong></h4>
+</section>
+<section id="textrecall-fractexttptexttp-textfn-99.8" class="level4">
+<h4 class="anchored" data-anchor-id="textrecall-fractexttptexttp-textfn-99.8"><span class="math inline">\(\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}\)</span> = <span class="math inline">\(99.8\%\)</span></h4>
+</section>
+<section id="f-1-score-2" class="level4">
+<h4 class="anchored" data-anchor-id="f-1-score-2"><strong><em>F-1 Score</em></strong></h4>
+</section>
+<section id="textf1-score-2-cdot-fractextprecision-cdot-textrecalltextprecision-textrecall-89.5" class="level4">
+<h4 class="anchored" data-anchor-id="textf1-score-2-cdot-fractextprecision-cdot-textrecalltextprecision-textrecall-89.5"><span class="math inline">\(\text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}\)</span> = <span class="math inline">\(89.5\%\)</span></h4>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In our pursuit to identify Twitter trolls using classification models, we explored the effectiveness of three distinct approaches: Logistic Regression, Random Forest, and Support Vector Machine (SVM). Our goal was to determine the most accurate and suitable model for the task, taking into account the challenge of imbalanced labels. During the evaluation of these models, the choice of the performance metric becomes crucial.</p>
+<section id="f1-score" class="level4">
+<h4 class="anchored" data-anchor-id="f1-score"><em>F1-Score:</em></h4>
+<p>The F1-scondefinedre is suitable for situations where there is unbalanced data. It strikes a balance between precision and recall, making it particularly useful in scenarios where both false positives and false negatives carry consequences - such as mistakenly identifying a person as a troll or missing an actual troll. By considering the trade-off between these two metrics, the F1-score provides a comprehensive view of a model’s effectiveness that fits our goals.</p>
+</section>
+<section id="recall-and-precision" class="level4">
+<h4 class="anchored" data-anchor-id="recall-and-precision"><em>Recall and Precision:</em></h4>
+<p>Recall and precision are also valuable metrics in the context of imbalanced classes. Recall assesses the model’s ability to correctly identify instances of the target class, which is crucial when the cost of false negatives is high. Precision measures the model’s accuracy in predicting the positive class, focusing on minimizing false positives.</p>
+</section>
+<section id="accuracy-3" class="level4">
+<h4 class="anchored" data-anchor-id="accuracy-3"><em>Accuracy:</em></h4>
+<p>While accuracy is a common evaluation metric, it might not be the most suitable measure when dealing with imbalanced classes. It might be misleading in scenarios where one class heavily outweighs the other, leading to an inaccurate representation of the model’s performance.</p>
+</section>
+<section id="findings" class="level3">
+<h3 class="anchored" data-anchor-id="findings">Findings</h3>
+<p>Given our data sets class imbalance and the paramount importance of both correctly identifying trolls and minimizing false classifications, the F1-score emerged as a robust measure to assess model success. In our specific context, where the accurate identification of trolls is crucial, the logistic regression model proved most successful, achieving an impressive F1-score of 0.9%.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
